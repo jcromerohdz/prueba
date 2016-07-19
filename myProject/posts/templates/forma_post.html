@@ -1,0 +1,15 @@
+{% extends "base_2.html"%}
+{% load crispy_forms_tags %}
+
+{%block head_title%}Mi Formulario{%endblock head_title%}
+          
+{% block content%}
+<div class='col-sm-8 col-sm-offset-2'>
+  <h2>Formulario</h2>
+  <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+  {{ form|crispy }}
+  <input class="btn btn-default" type="submit" value="Crear Post" />
+  </form>
+ </div> 
+
+{% endblock %}

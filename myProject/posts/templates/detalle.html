@@ -1,0 +1,15 @@
+{% extends "base_2.html"%}
+
+
+{% block content%}
+<div class='col-sm-8 col-sm-offset-2'>
+   {% if detalle.imagen %}	
+	<img src="{{detalle.imagen.url}} " class="img-responsive">
+	{% endif %}
+          <h2>{{saludo}}</h2>
+          	
+            <h1>{{detalle.titulo}}</h1><small> {{detalle.creado}}</small>
+            {{detalle.contenido|linebreaks}}</br>
+          
+</div>            
+{% endblock %}

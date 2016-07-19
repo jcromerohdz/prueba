@@ -1,0 +1,50 @@
+{% extends "base_2.html"%}
+
+
+
+{% block content%}
+      {% if messages %}
+
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+       <div class='col-sm-8 col-sm-offset-2'>
+       <h2>{{saludo}}</h2>
+       <div class="row">
+       {%for obj in listado_objetos%}
+       <div class="col-sm-12">
+         <div class="thumbnail">
+         {% if obj.imagen %}
+           <img src="{{obj.imagen.url}} " class="img-responsive"> 
+           <!-- <img src="..." alt="..."> -->
+         {% endif %}  
+           <div class="caption">
+             <h3><a href="{%url "actualizar" id=obj.id%}">{{obj.titulo}}</a> <small> {{obj.creado|timesince}} ago</small></h3>
+             <p>{{obj.contenido|linebreaks|truncatechars:150}}</p>
+             <p><a href="{%url "actualizar" id=obj.id%}" class="btn btn-primary" role="button">Editar</a> <a href="{%url "detalle" id=obj.id%}" class="btn btn-success" role="button">Ver</a> <a href="{%url "borrar" id=obj.id%}" class="btn btn-danger" role="button">Borrar</a></p>
+           </div>
+         </div>
+       </div>
+       
+       {% endfor %}
+
+       <div class="pagination">
+           <span class="step-links">
+               {% if listado_objetos.has_previous %}
+                   <a href="?page={{ listado_objetos.previous_page_number }}">previous</a>
+               {% endif %}
+
+               <span class="current">
+                   Page {{ listado_objetos.number }} of {{ listado_objetos.paginator.num_pages }}.
+               </span>
+
+               {% if listado_objetos.has_next %}
+                   <a href="?page={{ listado_objetos.next_page_number }}">next</a>
+               {% endif %}
+           </span>
+       </div>
+  </div>    
+{% endblock %}
